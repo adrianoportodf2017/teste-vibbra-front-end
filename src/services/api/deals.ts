@@ -56,7 +56,7 @@ export const dealsService = {
     const r = await api.post<{ bid: Bid }>(`/deal/${dealId}/bid`, bidData);
     return r.data;
   },
-  async updateBid(dealId: number, bidId: number, bidData: Bid): Promise<{ bid: Bid }> {
+  async updateBid(dealId: number, bidId: number, bidData: Partial<Bid>): Promise<{ bid: Bid }> {
     const r = await api.put<{ bid: Bid }>(`/deal/${dealId}/bid/${bidId}`, bidData);
     return r.data;
   },

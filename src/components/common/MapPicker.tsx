@@ -14,6 +14,7 @@ type Props = {
   value?: Location | null;
   onChange: (loc: Location) => void;
   className?: string;
+  disabled?: boolean;
 };
 
 // fallback inicial: São Paulo

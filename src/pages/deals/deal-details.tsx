@@ -264,7 +264,6 @@ export default function DealDetailsPage() {
     <MessagesList
       items={messages ?? []}
       loading={subLoading && messages == null}
-      dealId={dealId}
       currentUserId={currentUserId}
       toUserId={isOwner ? (peerId ?? undefined) : undefined}
       onSend={async (payload) => {

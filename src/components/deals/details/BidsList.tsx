@@ -85,6 +85,10 @@ export default function BidsList({
   }
 
   function startEdit(b: Bid) {
+    if (b.id === undefined) {
+      console.warn('Bid ID is undefined');
+      return;
+    }
     setEditingId(b.id);
     setEditValue(String(b.value));
     setEditDesc(b.description ?? "");
@@ -94,6 +98,10 @@ export default function BidsList({
     if (!onUpdate) return;
     const num = parseFloat(editValue.replace(",", "."));
     if (!Number.isFinite(num) || num <= 0) { alert("Informe um valor válido (> 0)."); return; }
+    if (b.id === undefined) {
+      console.warn('Bid ID is undefined');
+      return;
+    }
     setSavingId(b.id);
     try {
       await onUpdate(b.id, { value: num, description: editDesc.trim() });

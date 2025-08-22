@@ -25,7 +25,24 @@ export interface DealSearchFilters {
   lng?: number;
 }
 
-export interface Bid { id?: number; user_id: number; accepted: boolean; value: number; description: string; }
- 
+export interface Bid {
+  id?: number;
+  user_id: number;
+  accepted: boolean;
+  value: number;
+  description: string;
+  // Remova a propriedade 'payload' se não for necessária
+  // payload: Partial<Bid>; // ← Isso causa conflito!
+}
+
+// Se você precisa de um tipo para criar bids (sem id)
+export interface BidCreatePayload {
+  user_id: number;
+  value: number;
+  description: string;
+}
+
+// Tipo para atualizar bids (campos parciais)
+export type BidUpdatePayload = Partial<Omit<Bid, 'id'>>; 
 export interface DeliveryStep { location: string; incoming_date: string; outcoming_date: string; }
 export interface Delivery { from: Location; to: Location; value: number; steps: DeliveryStep[]; }

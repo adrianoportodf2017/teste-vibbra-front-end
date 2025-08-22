@@ -7,7 +7,8 @@ import { dealsService } from "../../../services/api";
 import type { Bid, Delivery } from "../../../types";
 import { getCurrentUserId } from "../../../utils/auth";
 
-type TabKey = "bids" | "delivery";
+export type TabKey = 'details' | 'bids' | 'delivery';
+
 
 export default function DealTabs() {
   const { id } = useParams<{ id: string }>();
