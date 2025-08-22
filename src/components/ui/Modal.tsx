@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 export default function Modal({ open, children }: { open: boolean; children: ReactNode }) {
   if (!open) return null;

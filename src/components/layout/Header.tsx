@@ -5,11 +5,23 @@ import { dealsService, invitesService, usersService } from '../../services/api';
 import type { Deal, Location, User } from '../../types';
 
 interface HeaderProps {
+  dark: boolean; // ADICIONAR esta linha
+  onToggleTheme: () => void; // ADICIONAR se não existir
   onToggleSideMenu: () => void;
   isNotificationsMenuOpen: boolean;
   setNotificationsMenuOpen: Dispatch<SetStateAction<boolean>>;
   isProfileMenuOpen: boolean;
   setProfileMenuOpen: Dispatch<SetStateAction<boolean>>;
+}
+
+
+interface UpdateUserData {
+  name?: string;
+  email?: string;
+  login?: string;
+  location?: string;
+  password?:string;
+  // outras propriedades...
 }
 
 function getStoredUser(): User | null {
@@ -222,7 +234,7 @@ function ProfileModal({ user, onClose, onSaved }:{
     if (!userId) { alert('ID do usuário não encontrado. Garanta que /authenticate retorne { user: { id, ... } }.'); return; }
     setSaving(true);
     try {
-      const payload: UpdateUserData = { name: name.trim(), login: login.trim(), location };
+      const payload: UpdateUserData = { name: name.trim(), login: login.trim(), location: '' };
       const r = await usersService.updateUser(userId, payload);
       onSaved({ ...user, ...r.user });
       onClose();

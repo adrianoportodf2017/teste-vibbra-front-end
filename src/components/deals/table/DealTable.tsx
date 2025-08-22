@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { dealsService } from '../../../services/api';
 import type { Deal, Bid, Message } from '../../../types';
 

@@ -2,8 +2,7 @@ import { NavLink } from 'react-router-dom';
 
 interface SidebarProps {
   isOpen: boolean;
-  onClose: () => void;
-}
+ }
 
 const navLinkBase =
   'inline-flex w-full items-center text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200';
@@ -44,7 +43,7 @@ function Item({
   );
 }
 
-export default function Sidebar({ isOpen, onClose }: SidebarProps) {
+export default function Sidebar({ isOpen }: SidebarProps) {
   // Ícones (SVG inline)
   const HomeIcon = (
     <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round">
