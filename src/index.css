@@ -1,0 +1,14 @@
+@import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
+
+/* Estilos personalizados para formulários (equivalente ao @tailwindcss/forms) */
+input::placeholder,
+textarea::placeholder {
+  @apply text-gray-400;
+}
+
+/* Estilos personalizados adicionais se necessário */
+.dark input::placeholder,
+.dark textarea::placeholder {
+  @apply text-gray-400;
+}
