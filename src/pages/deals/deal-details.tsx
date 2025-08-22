@@ -191,13 +191,7 @@ export default function DealDetailsPage() {
 
   return (
     <div className="space-y-6">
-      <DealHeader
-        id={dealId}
-        type={deal.type}
-        value={deal.value}
-        description={deal.description}
-        location={deal.location}
-        urgency={deal.urgency}
+      <DealHeader  
       />
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">

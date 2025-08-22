@@ -8,9 +8,13 @@ import type { Bid, Delivery } from "../../../types";
 import { getCurrentUserId } from "../../../utils/auth";
 
 export type TabKey = 'details' | 'bids' | 'delivery';
+type DealTabsProps = {
+    active: TabKey;
+  onChange: React.Dispatch<React.SetStateAction<TabKey>>;
+     tabs: { key: TabKey; label: string }[];
+   };
 
-
-export default function DealTabs() {
+   export default function DealTabs({ active  }: DealTabsProps) {
   const { id } = useParams<{ id: string }>();
   const dealId = Number(id);
 
@@ -19,8 +23,7 @@ export default function DealTabs() {
     return v != null ? Number(v) : null;
   }, []);
 
-  const [active, setActive] = useState<TabKey>("bids");
-  const [subLoading, setSubLoading] = useState(false);
+   const [subLoading, setSubLoading] = useState(false);
 
   const [bids, setBids] = useState<Bid[] | null>(null);
   const [delivery, setDelivery] = useState<Delivery | null>(null);
@@ -98,8 +101,7 @@ export default function DealTabs() {
                 ? "border-b-2 border-blue-600 text-blue-600"
                 : "text-gray-600 dark:text-gray-400"
             }`}
-            onClick={() => setActive(key)}
-          >
+           >
             {key === "bids" ? "Lances" : "Entrega"}
           </button>
         ))}
