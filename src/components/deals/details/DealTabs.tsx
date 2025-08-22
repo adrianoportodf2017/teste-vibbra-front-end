@@ -8,13 +8,9 @@ import type { Bid, Delivery } from "../../../types";
 import { getCurrentUserId } from "../../../utils/auth";
 
 export type TabKey = 'details' | 'bids' | 'delivery';
-type DealTabsProps = {
-    active: TabKey;
-  onChange: React.Dispatch<React.SetStateAction<TabKey>>;
-     tabs: { key: TabKey; label: string }[];
-   };
+ 
 
-   export default function DealTabs({ active  }: DealTabsProps) {
+   export default function DealTabs() {
   const { id } = useParams<{ id: string }>();
   const dealId = Number(id);
 
@@ -27,6 +23,7 @@ type DealTabsProps = {
 
   const [bids, setBids] = useState<Bid[] | null>(null);
   const [delivery, setDelivery] = useState<Delivery | null>(null);
+  const [active, setActive] = useState<TabKey>("bids");
 
   // dono do deal (para decidir se mostra ações de aceitar/rejeitar)
   const [dealOwnerId, setDealOwnerId] = useState<number | null>(null);
@@ -101,7 +98,8 @@ type DealTabsProps = {
                 ? "border-b-2 border-blue-600 text-blue-600"
                 : "text-gray-600 dark:text-gray-400"
             }`}
-           >
+            onClick={() => setActive(key)}
+          >
             {key === "bids" ? "Lances" : "Entrega"}
           </button>
         ))}
