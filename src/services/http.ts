@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost/api',
+  baseURL: 'http://api-teste-vibbra.agenciatecnet.com.br/api',
   timeout: 10000,
 });
 
