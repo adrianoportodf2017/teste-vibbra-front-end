@@ -4,12 +4,9 @@ import type { Bid } from "../../../types";
 type BidsListProps = {
   items: Bid[];
   loading?: boolean;
-  dealId: number;
-  currentUserId?: number;
-  /** id do dono da negociação (deal.user_id) */
-  dealOwnerId?: number;
-  /** opcional: bool vindo do pai; se não vier, calculo localmente com dealOwnerId */
-  isOwner?: boolean;
+   currentUserId?: number;
+   dealOwnerId?: number;
+   isOwner?: boolean;
   onCreate?: (payload: Omit<Bid, "id">) => Promise<void>;
   onUpdate?: (bidId: number, payload: Partial<Bid>) => Promise<void>;
 };
@@ -21,8 +18,7 @@ function formatBRL(n: number) {
 
 export default function BidsList({
   items,
-  loading = false,
-  dealId,
+  loading = false,  
   currentUserId,
   dealOwnerId,
   isOwner,
@@ -48,9 +44,8 @@ export default function BidsList({
   }, []);
   const meId = typeof currentUserId === "number" ? currentUserId : (fallbackUserId ?? undefined);
 
- 
+  // Removida variável acceptedBid que não estava sendo usada (erro TS6133)
   
- 
   // recalcula dono do deal localmente (à prova de props bugadas)
   const isDealOwner = useMemo(() => {
     if (dealOwnerId == null || meId == null) return false;
@@ -59,9 +54,6 @@ export default function BidsList({
 
   // prioridade: prop do pai; fallback: cálculo local
   const owner = (typeof isOwner === "boolean") ? isOwner : isDealOwner;
-
- 
-  const acceptedBid = useMemo(() => items.find(b => b.accepted), [items]);
 
   // visibilidade: dono vê tudo; não-dono vê seus lances + o aceito (se houver)
   const visibleBids = useMemo(() => {
@@ -113,6 +105,9 @@ export default function BidsList({
 
   async function setAccepted(b: Bid, accept: boolean) {
     if (!onUpdate) return;
+    // Correção: verificar se b.id não é undefined antes de usar
+    if (b.id === undefined) return;
+    
     setSavingId(b.id);
     try {
       await onUpdate(b.id, { accepted: accept });
