@@ -9,9 +9,9 @@ import {
    DeliveryPanel,
 } from '../../components/deals';
 import { dealsService } from '../../services/api';
-import type { Deal, Message, Bid, Delivery, ConversationItem } from '../../types';
+import type { Deal, Message, Bid, Delivery, ConversationItem, TabKey } from '../../types';
 import { getCurrentUserId } from '../../utils/auth';
-
+ 
 type Status = 'idle' | 'loading' | 'success' | 'error';
 
 export default function DealDetailsPage() {
@@ -32,7 +32,7 @@ export default function DealDetailsPage() {
   const [error, setError] = useState<string | null>(null);
 
   const [deal, setDeal] = useState<Deal | null>(null);
-  const [activeTab, setActiveTab] = useState<'details' | 'bids' | 'delivery'>('details');
+  const [activeTab, setActiveTab] = useState<TabKey>('details');
 
   const [messages, setMessages] = useState<Message[] | null>(null);
   const [bids, setBids] = useState<Bid[] | null>(null);

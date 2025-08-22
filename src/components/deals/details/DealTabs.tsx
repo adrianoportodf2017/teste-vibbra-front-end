@@ -1,16 +1,19 @@
-// src/components/deals/DealTabs.tsx
 import { useEffect, useMemo, useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import BidsList from "./BidsList";
 import DeliveryPanel from "./DeliveryPanel";
 import { dealsService } from "../../../services/api";
-import type { Bid, Delivery } from "../../../types";
+import type { Bid, Delivery, TabKey } from "../../../types";
 import { getCurrentUserId } from "../../../utils/auth";
 
-export type TabKey = 'details' | 'bids' | 'delivery';
  
+type DealTabsProps = {
+  active: TabKey;
+  onChange: (key: TabKey) => void;
+  tabs: { key: TabKey; label: string }[];
+};
 
-   export default function DealTabs() {
+export default function DealTabs({ active, onChange, tabs }: DealTabsProps) {
   const { id } = useParams<{ id: string }>();
   const dealId = Number(id);
 
@@ -19,11 +22,9 @@ export type TabKey = 'details' | 'bids' | 'delivery';
     return v != null ? Number(v) : null;
   }, []);
 
-   const [subLoading, setSubLoading] = useState(false);
-
+  const [subLoading, setSubLoading] = useState(false);
   const [bids, setBids] = useState<Bid[] | null>(null);
   const [delivery, setDelivery] = useState<Delivery | null>(null);
-  const [active, setActive] = useState<TabKey>("bids");
 
   // dono do deal (para decidir se mostra ações de aceitar/rejeitar)
   const [dealOwnerId, setDealOwnerId] = useState<number | null>(null);
@@ -90,17 +91,17 @@ export type TabKey = 'details' | 'bids' | 'delivery';
     <div className="mt-6">
       {/* Navegação das abas */}
       <div className="mb-4 flex gap-2 border-b border-gray-300 dark:border-gray-700">
-        {(["bids", "delivery"] as TabKey[]).map((key) => (
+        {tabs.map((t) => (
           <button
-            key={key}
+            key={t.key}
             className={`px-4 py-2 text-sm font-medium ${
-              active === key
+              active === t.key
                 ? "border-b-2 border-blue-600 text-blue-600"
                 : "text-gray-600 dark:text-gray-400"
             }`}
-            onClick={() => setActive(key)}
+            onClick={() => onChange(t.key)}
           >
-            {key === "bids" ? "Lances" : "Entrega"}
+            {t.label}
           </button>
         ))}
       </div>
@@ -137,6 +138,9 @@ export type TabKey = 'details' | 'bids' | 'delivery';
             }}
           />
         )}
+
+        {/* Se quiser algo para 'details', renderize aqui */}
+        {active === "details" && null}
       </div>
     </div>
   );
