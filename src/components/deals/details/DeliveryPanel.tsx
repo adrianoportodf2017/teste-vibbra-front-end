@@ -1,5 +1,4 @@
-import type { Delivery } from "../../../types";
-
+ 
 type DeliveryPanelProps = {
   delivery: any; // pode vir {delivery:{...}, steps:[...]} OU {from,to,value,steps?}
   loading?: boolean;

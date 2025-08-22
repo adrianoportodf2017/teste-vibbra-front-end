@@ -6,8 +6,7 @@ import {
   DealTabs,
   MessagesList,
   ConversationsList,
-  BidsList,
-  DeliveryPanel,
+   DeliveryPanel,
 } from '../../components/deals';
 import { dealsService } from '../../services/api';
 import type { Deal, Message, Bid, Delivery, ConversationItem } from '../../types';
@@ -102,11 +101,7 @@ export default function DealDetailsPage() {
 
       // se não há peer selecionado, define o primeiro da lista
       if (!peerId && items.length > 0) {
-        const firstPeerId =
-          (items[0] as any)?.user?.id ??
-          (items[0] as any)?.peer?.id ??
-          (items[0] as any)?.user_id ??
-          null;
+        
         //if (firstPeerId != null) setPeerId(Number(firstPeerId));
       }
     } finally {

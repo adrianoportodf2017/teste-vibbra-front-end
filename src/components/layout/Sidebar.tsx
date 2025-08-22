@@ -2,6 +2,7 @@ import { NavLink } from 'react-router-dom';
 
 interface SidebarProps {
   isOpen: boolean;
+  onClose: () => void;
  }
 
 const navLinkBase =

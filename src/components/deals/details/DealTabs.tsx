@@ -111,7 +111,6 @@ export default function DealTabs() {
             key={`bids-${isOwner ? "owner" : "user"}`} // força re-mount ao alternar modo
             loading={subLoading && bids == null}
             items={bids ?? []}
-            dealId={dealId}
             currentUserId={currentUserId}
             isOwner={isOwner}
             dealOwnerId={dealOwnerId ?? undefined}

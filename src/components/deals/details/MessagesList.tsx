@@ -4,8 +4,7 @@ import type { Message } from "../../../types";
 type MessagesListProps = {
   items: Message[];
   loading?: boolean;
-  dealId: number;
-  /** id do usuário logado; se não vier, busca em localStorage */
+   /** id do usuário logado; se não vier, busca em localStorage */
   currentUserId?: number;
   /** destinatário quando o dono está falando com um interessado (chat 1:1) */
   toUserId?: number;
@@ -17,7 +16,6 @@ type MessagesListProps = {
 export default function MessagesList({
   items,
   loading = false,
-  dealId,
   currentUserId,
   toUserId,
   onSend,

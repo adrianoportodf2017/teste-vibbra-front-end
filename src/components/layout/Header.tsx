@@ -19,9 +19,15 @@ interface UpdateUserData {
   name?: string;
   email?: string;
   login?: string;
-  location?: string;
-  password?:string;
-  // outras propriedades...
+  location?: {
+    lat?: number;
+    lng?: number;
+    address?: string;
+    city?: string;
+    state?: string;
+    zip_code?: number;
+  }; // CORRIGIR para usar o tipo correto
+  password?: string;
 }
 
 function getStoredUser(): User | null {
@@ -234,7 +240,18 @@ function ProfileModal({ user, onClose, onSaved }:{
     if (!userId) { alert('ID do usuário não encontrado. Garanta que /authenticate retorne { user: { id, ... } }.'); return; }
     setSaving(true);
     try {
-      const payload: UpdateUserData = { name: name.trim(), login: login.trim(), location: '' };
+      const payload: UpdateUserData = { 
+        name: name.trim(), 
+        login: login.trim(), 
+        location: {
+          address: location.address,
+          city: location.city,
+          state: location.state,
+          lat: location.lat,
+          lng: location.lng,
+          zip_code: location.zip_code
+        }
+      };
       const r = await usersService.updateUser(userId, payload);
       onSaved({ ...user, ...r.user });
       onClose();

@@ -166,7 +166,7 @@ export default function DealForm() {
     const locPayload: Location = {
       ...(location as Location),
       state: normUF,
-      zip_code: cepDigits,
+      zip_code: Number(cepDigits),
     };
     if (manualAddress) {
       // se strings vazias/não numéricas, tira do payload

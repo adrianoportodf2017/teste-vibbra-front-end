@@ -1,7 +1,7 @@
 // src/hooks/useDealsSearch.ts
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { dealsService } from '../services/api';
-import type { Deal, DealSearchFilters, DealType, Photo } from '../types';
+import type { Deal, DealSearchFilters, DealType } from '../types';
 import { haversineKm } from '../utils/geo';
 
 type Status = 'idle' | 'loading' | 'success' | 'error';
