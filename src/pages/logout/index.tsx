@@ -11,7 +11,7 @@ export default function LogoutPage() {
       // localStorage.removeItem('user');
       // sessionStorage.clear();
     } finally {
-      navigate('/login', { replace: true });
+      navigate('/login');
     }
   }, [navigate]);
 
